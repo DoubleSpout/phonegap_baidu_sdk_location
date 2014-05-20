@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="com.spout.phonegap.plugins.baidulocation" version="0.1.0">
+    <name>BaiduLocation</name>
+    <description>Baidu Location Plugin for Phonegap</description>
+    <license>MIT</license>
+    <keywords>baidu, location, phonegap</keywords>
+ 
+    <!-- android -->
+    <platform name="android">
+        <js-module src="www/baidulocation.js" name="BiaduLocation">
+            <clobbers target="window.baiduLocation" />
+        </js-module>
+ 
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BaiduLocation">
+                <param name="android-package" value="com.spout.phonegap.plugins.baidulocation.BaiduLocation"/>
+            </feature>
+        </config-file> 
+        
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+            <uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
+        </config-file>
+        
+        <source-file src="src/android/BaiduLocation.java" target-dir="src/com/spout/phonegap/plugins/baidulocation" />   
+        <source-file src="src/android/locSDK_4.0.jar" target-dir="libs" framework="true"/>      
+        <source-file src="src/android/liblocSDK4.so" target-dir="libs/armeabi" framework="true"/>   
+    </platform>         
+</plugin>
